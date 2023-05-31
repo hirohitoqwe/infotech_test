@@ -12,7 +12,8 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/categories',\App\Http\Livewire\CategoriesList::class);
+Route::get('/categories',\App\Http\Livewire\CategoryComponent::class);
+Route::get('/products',\App\Http\Livewire\ProductComponent::class);
 
 Route::get('/', function () {
     return view('welcome');
