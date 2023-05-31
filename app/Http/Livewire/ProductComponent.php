@@ -23,9 +23,12 @@ class ProductComponent extends Component
         $product->price = $this->product_price;
         $product->save();
         foreach ($this->categories as $key => $category) {
+            $model = Category::where('category_name', $category)->first();
+            $model->product_count += 1;
+            $model->save();
             $rel = new RelantionProdCat();
             $rel->product_id = $product->id;
-            $rel->category_id = Category::where('category_name', $category)->first()->id;
+            $rel->category_id = $model->id;
             $rel->save();
         }
         $this->created = true;

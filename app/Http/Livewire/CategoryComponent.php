@@ -22,6 +22,11 @@ class CategoryComponent extends Component
         $new_category->category_name = $this->new_category;
         $new_category->description = $this->description;
         $new_category->parent_category = ($this->parentCategory == "") ? null : $this->parentCategory;
+        if ($this->parentCategory != "") {
+            $category = Category::where('category_name', $this->parentCategory)->first();
+            $category->sub_count++;
+            $category->save();
+        }
         $new_category->save();
         $this->created = true;
     }
