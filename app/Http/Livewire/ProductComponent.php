@@ -5,7 +5,6 @@ namespace App\Http\Livewire;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\RelantionProdCat;
-use App\Repositories\CategoryRepository;
 use Livewire\Component;
 
 class ProductComponent extends Component
@@ -30,7 +29,7 @@ class ProductComponent extends Component
             $rel->save();
         }
         $this->created = true;
-    }//TODO VALIDATION AND CATEGORIES SELECT
+    }//TODO VALIDATION
 
     public function render()
     {
