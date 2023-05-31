@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class CategoryComponent extends Component
 {
-    public string $new_category = "Dress";
+    public string $new_category;
 
     public function fillTheLove()
     {
