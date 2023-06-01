@@ -6,7 +6,7 @@ use App\Models\Category;
 
 class CategoryService
 {
-    public function createCategory(array $new_category): void
+    public function createCategory(array $new_category): array
     {
         $n_category = new Category();
         $n_category->category_name = $new_category["category_name"];
@@ -18,6 +18,11 @@ class CategoryService
             $category->save();
         }
         $n_category->save();
+        return [
+            "category_name" => "",
+            "description" => "",
+            "parent_category" => ""
+        ];
     }
 
     public function updateCategory(int $id, array $edited): void

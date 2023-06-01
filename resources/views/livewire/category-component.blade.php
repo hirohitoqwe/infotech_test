@@ -11,7 +11,7 @@
         </div>
         <div>
             <label for="parent">Родительская категория</label>
-            <div wire:ignore>
+            <div>
                 <select wire:model="new_category.{{"parent_category"}}" name="parent">
                     <option value="">Отсутствует</option>
                     @foreach($categories as $category)
