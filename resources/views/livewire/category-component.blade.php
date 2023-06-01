@@ -2,17 +2,17 @@
     <div class="float-left m-2">
         <div>
             <label for="n_category_name">Наименование новой категории</label>
-            <input type="text" id="n_category_name" class="form-control" wire:model="new_category">
+            <input type="text" id="n_category_name" class="form-control" wire:model="new_category.{{"category_name"}}">
         </div>
         <div>
             <label for="n_category_descr">Описание новой категории</label>
             <textarea id="n_category_descr" style="resize: none" class="form-control bi-textarea-resize"
-                      wire:model="description"></textarea>
+                      wire:model="new_category.{{"description"}}"></textarea>
         </div>
         <div>
             <label for="parent">Родительская категория</label>
             <div wire:ignore>
-                <select wire:model="parentCategory" name="parent">
+                <select wire:model="new_category.{{"parent_category"}}" name="parent">
                     <option value="">Отсутствует</option>
                     @foreach($categories as $category)
                         <option value={{$category->category_name}}>{{$category->category_name}}</option>

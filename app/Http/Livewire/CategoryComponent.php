@@ -4,39 +4,32 @@ namespace App\Http\Livewire;
 
 use App\Models\Category;
 use App\Models\RelantionProdCat;
+use App\Services\CategoryService;
 use Livewire\Component;
 use function Symfony\Component\Translation\t;
 
 class CategoryComponent extends Component
 {
-    public string $new_category;
 
-    public $description;
+    public array $new_category = [
+        "category_name" => "",
+        "description" => "",
+        "parentCategory" => ""
+    ];
 
-    public string $parentCategory = "";
+    public array $edited = [
+        "name" => "",
+        "description" => "",
+        "parent_category" => ""
+    ];
 
     public bool $created = false;
 
     public int $edit = 0;
 
-    public array $edited = [
-        "name" => "",
-        "description" => "",
-        "parent_category"=>""
-    ];
-
-    public function create()
+    public function create(CategoryService $service)
     {
-        $new_category = new Category();
-        $new_category->category_name = $this->new_category;
-        $new_category->description = $this->description;
-        $new_category->parent_category = ($this->parentCategory == "") ? null : $this->parentCategory;
-        if ($this->parentCategory != "") {
-            $category = Category::where('category_name', $this->parentCategory)->first();
-            $category->sub_count++;
-            $category->save();
-        }
-        $new_category->save();
+        $service->createCategory($this->new_category);
         $this->created = true;
     }
 
@@ -58,17 +51,9 @@ class CategoryComponent extends Component
         $this->edit = 0;
     }
 
-    public function update(int $id)
+    public function update(int $id, CategoryService $service)
     {
-        $category = Category::find($id);
-        $edits = Category::where("parent_category", $category->category_name)->get();
-        foreach ($edits as $edit) {
-            $edit->parent_category = $this->edited["name"];
-            $edit->save();
-        }
-        $category->category_name = $this->edited["name"];
-        $category->description = $this->edited["description"];
-        $category->save();
+        $service->updateCategory($id, $this->edited);
         $this->edit = 0;
     }//TODO VALIDATION
 
