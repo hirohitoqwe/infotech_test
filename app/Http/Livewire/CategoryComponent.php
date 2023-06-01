@@ -31,6 +31,11 @@ class CategoryComponent extends Component
         $this->created = true;
     }
 
+    public function delete(int $id)
+    {
+        Category::find($id)->delete();
+    }
+
     public function render()
     {
         return view('livewire.category-component', ['categories' => Category::all()])->extends("layouts.app");
