@@ -24,11 +24,27 @@
         @foreach($categories as $category)
             <hr>
             <div class="w-25 h-50 border-3 border-dark">
-                <p>Наименование  категории: {{$category->category_name}}</p>
+                <p>Наименование категории: {{$category->category_name}}</p>
                 <p>Количество подкатегорий: {{$category->sub_count}}</p>
                 <p>Количество товаров в категории: {{$category->product_count}}</p>
                 <p>Наименование родительской категории: {{$category->parent_category ?? "Отсутсвует"}}</p>
-                <p>Удалить <button wire:click="delete({{$category->id}})"><i class="bi bi-x-lg"></i></button></p>
+                <p>Удалить
+                    <button wire:click="delete({{$category->id}})"><i class="bi bi-x-lg"></i></button>
+                </p>
+                <p>Редактировать
+                    <button wire:click="changeVisibility"><i class="bi bi-pencil"></i></button>
+                </p>
+                <div class="edit" style="{{$edit ? "" :"display:none"}}">
+                    <p>
+                        Наименование
+                        <input type="text" wire:model="edited.{{"name"}}">
+                    </p>
+                    <p>
+                        Описание
+                        <input type="text" wire:model="edited.{{"description"}}">
+                    </p>
+                    <button wire:click="update({{$category->id}})">Обновить</button>
+                </div>
             </div>
             <hr>
         @endforeach
