@@ -5,32 +5,23 @@ namespace App\Http\Livewire;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\RelantionProdCat;
+use App\Services\ProductService;
 use Livewire\Component;
 
 class ProductComponent extends Component
 {
-    public string $product_name;
-    public int $product_price;
 
-    public bool $created = false;
+    public array $new_product = [
+        "product_name" => "",
+        "product_price" => 0
+    ];
 
     public array $categories = [];
+    public bool $created = false;
 
-    public function create()
+    public function create(ProductService $service)
     {
-        $product = new Product();
-        $product->product_name = $this->product_name;
-        $product->price = $this->product_price;
-        $product->save();
-        foreach ($this->categories as $key => $category) {
-            $model = Category::where('category_name', $category)->first();
-            $model->product_count += 1;
-            $model->save();
-            $rel = new RelantionProdCat();
-            $rel->product_id = $product->id;
-            $rel->category_id = $model->id;
-            $rel->save();
-        }
+        $service->createProduct($this->new_product, $this->categories);
         $this->created = true;
     }//TODO VALIDATION
 

@@ -1,7 +1,7 @@
 <div>
     <p>
-        <input type="text" wire:model="product_name">
-        <input type="number" wire:model="product_price">
+        <input type="text" wire:model="new_product.{{"product_name"}}">
+        <input type="number" wire:model="new_product.{{"product_price"}}">
     </p>
     <div>
         <select wire:model="categories" multiple>
