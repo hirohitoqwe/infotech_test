@@ -21,7 +21,8 @@ class CategoryComponent extends Component
 
     public array $edited = [
         "name" => "",
-        "description" => ""
+        "description" => "",
+        "parent_category"=>""
     ];
 
     public function create()

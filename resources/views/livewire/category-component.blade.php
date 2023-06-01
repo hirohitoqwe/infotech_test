@@ -1,4 +1,4 @@
-<div>
+<div >
     <div class="float-left m-2">
         <div>
             <label for="n_category_name">Наименование новой категории</label>
@@ -11,8 +11,8 @@
         </div>
         <div>
             <label for="parent">Родительская категория</label>
-            <div>
-                <select id="select2-dropdown" name="parent" wire:model="parentCategory">
+            <div wire:ignore>
+                <select wire:model="parentCategory" name="parent">
                     <option value="">Отсутствует</option>
                     @foreach($categories as $category)
                         <option value={{$category->category_name}}>{{$category->category_name}}</option>
@@ -57,11 +57,3 @@
         @endforeach
     </div>
 </div>
-<script>
-    $(document).ready(function () {
-        $('#select2-dropdown').select2();
-        $('#select2-dropdown').on('change', function (e) {
-            var data = $('#select2-dropdown').select2("val");
-        });
-    });
-</script>
