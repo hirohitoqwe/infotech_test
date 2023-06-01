@@ -6,16 +6,19 @@
         </div>
         <div>
             <label for="n_category_descr">Описание новой категории</label>
-            <textarea id="n_category_descr" style="resize: none" class="form-control bi-textarea-resize" wire:model="description"></textarea>
+            <textarea id="n_category_descr" style="resize: none" class="form-control bi-textarea-resize"
+                      wire:model="description"></textarea>
         </div>
         <div>
             <label for="parent">Родительская категория</label>
-            <select id="parent" wire:model="parentCategory">
-                <option value="">Отсутствует</option>
-                @foreach($categories as $category)
-                    <option value={{$category->category_name}}>{{$category->category_name}}</option>
-                @endforeach
-            </select>
+            <div>
+                <select id="select2-dropdown" name="parent" wire:model="parentCategory">
+                    <option value="">Отсутствует</option>
+                    @foreach($categories as $category)
+                        <option value={{$category->category_name}}>{{$category->category_name}}</option>
+                    @endforeach
+                </select>
+            </div>
         </div>
         <button wire:click="create">Создать новую категорию</button>
     </div>
@@ -36,7 +39,7 @@
                 <p>Редактировать
                     <button wire:click="changeEditCategory({{$category->id}})"><i class="bi bi-pencil"></i></button>
                 </p>
-                <div class="options" >
+                <div class="options">
                     <div class="edit" style="{{$edit === $category->id ? "" :"display:none"}}">
                         <p>
                             <label for="edited_name">Наименование</label>
@@ -44,7 +47,8 @@
                         </p>
                         <p>
                             <label for="edited_desc">Описание</label>
-                            <textarea id="edited_desc" style="resize: none" class="form-control" wire:model="edited.{{"description"}}"></textarea>
+                            <textarea id="edited_desc" style="resize: none" class="form-control"
+                                      wire:model="edited.{{"description"}}"></textarea>
                         </p>
                         <button wire:click="update({{$category->id}})">Обновить</button>
                     </div>
@@ -53,3 +57,11 @@
         @endforeach
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+        $('#select2-dropdown').select2();
+        $('#select2-dropdown').on('change', function (e) {
+            var data = $('#select2-dropdown').select2("val");
+        });
+    });
+</script>

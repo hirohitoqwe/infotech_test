@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Category;
+use App\Models\RelantionProdCat;
 use Livewire\Component;
 use function Symfony\Component\Translation\t;
 
@@ -59,6 +60,11 @@ class CategoryComponent extends Component
     public function update(int $id)
     {
         $category = Category::find($id);
+        $edits = Category::where("parent_category", $category->category_name)->get();
+        foreach ($edits as $edit) {
+            $edit->parent_category = $this->edited["name"];
+            $edit->save();
+        }
         $category->category_name = $this->edited["name"];
         $category->description = $this->edited["description"];
         $category->save();
