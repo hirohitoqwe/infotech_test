@@ -11,6 +11,8 @@
 </head>
 <body>
 <div class="container">
+    <a href="/products">Товары</a>
+    <a href="/">Категории</a>
     @yield('content')
 </div>
 @livewireScripts
