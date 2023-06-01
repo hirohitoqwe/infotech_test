@@ -16,7 +16,7 @@ class CategoryComponent extends Component
 
     public bool $created = false;
 
-    public int $edit;
+    public int $edit = 0;
 
     public array $edited = [
         "name" => "",
@@ -45,7 +45,15 @@ class CategoryComponent extends Component
 
     public function changeEditCategory($id)
     {
+        $category = Category::find($id);
+        $this->edited["name"] = $category->category_name;
+        $this->edited["description"] = $category->description;
         $this->edit = $id;
+    }
+
+    public function nullVision()
+    {
+        $this->edit = 0;
     }
 
     public function update(int $id)
@@ -54,7 +62,7 @@ class CategoryComponent extends Component
         $category->category_name = $this->edited["name"];
         $category->description = $this->edited["description"];
         $category->save();
-        $this->edit = !$this->edit;
+        $this->edit = 0;
     }//TODO VALIDATION
 
     public function render()
