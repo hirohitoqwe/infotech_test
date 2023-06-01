@@ -16,7 +16,7 @@ class CategoryComponent extends Component
 
     public bool $created = false;
 
-    public bool $edit = false;
+    public int $edit;
 
     public array $edited = [
         "name" => "",
@@ -43,9 +43,9 @@ class CategoryComponent extends Component
         Category::find($id)->delete();
     }
 
-    public function changeVisibility()
+    public function changeEditCategory($id)
     {
-        $this->edit = !$this->edit;
+        $this->edit = $id;
     }
 
     public function update(int $id)

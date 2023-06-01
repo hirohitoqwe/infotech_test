@@ -32,9 +32,9 @@
                     <button wire:click="delete({{$category->id}})"><i class="bi bi-x-lg"></i></button>
                 </p>
                 <p>Редактировать
-                    <button wire:click="changeVisibility"><i class="bi bi-pencil"></i></button>
+                    <button wire:click="changeEditCategory({{$category->id}})"><i class="bi bi-pencil"></i></button>
                 </p>
-                <div class="edit" style="{{$edit ? "" :"display:none"}}">
+                <div class="edit" style="{{$edit == $category->id ? "" :"display:none"}}">
                     <p>
                         Наименование
                         <input type="text" wire:model="edited.{{"name"}}">
