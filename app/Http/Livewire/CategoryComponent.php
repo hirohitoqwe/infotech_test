@@ -25,8 +25,6 @@ class CategoryComponent extends Component
 
     public bool $created = false;
 
-    public $property;
-
     public Collection $categories;
 
     public int $edit = 0;
@@ -62,6 +60,11 @@ class CategoryComponent extends Component
         $this->edited["description"] = $category->description;
         $this->edited["parent_category"] = $category->parent_category;
         $this->edit = $id;
+    }
+
+    public function refresh()
+    {
+        $this->categories = Category::all();
     }
 
     public function update(int $id, CategoryService $service)

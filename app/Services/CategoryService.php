@@ -36,7 +36,7 @@ class CategoryService
         }
         $category->fill([
             'category_name' => $edited['name'],
-            'category_description' => $edited['description']
+            'description' => $edited['description']
         ])->save();
     }
 }
