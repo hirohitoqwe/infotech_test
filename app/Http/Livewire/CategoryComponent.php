@@ -25,6 +25,8 @@ class CategoryComponent extends Component
 
     public bool $created = false;
 
+    public $property;
+
     public Collection $categories;
 
     public int $edit = 0;

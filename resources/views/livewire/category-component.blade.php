@@ -13,8 +13,8 @@
         </div>
         <div>
             <label for="parent">Родительская категория</label>
-            <div>
-                <select wire:model="new_category.{{"parent_category"}}" name="parent" class="w-25">
+            <div wire:ignore>
+                <select id="select-category" name="parent" class="w-25">
                     <option value="">Отсутствует</option>
                     @foreach($categories as $category)
                         <option value={{$category->category_name}}>{{$category->category_name}}</option>
@@ -22,7 +22,7 @@
                 </select>
             </div>
         </div>
-        <button wire:click="create">Создать новую категорию</button>
+        <button class="btn btn-success mt-md-2" wire:click="create">Создать новую категорию</button>
     </div>
     @if($created)
         <h3>Категория создана</h3>
@@ -61,7 +61,22 @@
     </div>
 </div>
 <script>
-    $("select").select2({
-        theme: "bootstrap-5",
-    }).off('click');
+    $(document).ready(function () {
+        $('select').select2();
+    })
+
+    let loadSelect2 = function (element, settings) {
+        let $element = window.$(element);
+        $element.on('change', function (e) {
+            @this.
+            set('new_category.parent_category', $(this).select2("val"));
+        });
+    }
+
+    document.addEventListener("livewire:load", () => {
+        let settings = {};
+
+        loadSelect2('#select-category', settings);
+    })
+
 </script>
