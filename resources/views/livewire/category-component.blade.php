@@ -2,12 +2,13 @@
     <div class="float-left m-2">
         <div>
             <label for="n_category_name">Наименование новой категории</label>
-            <input type="text" id="n_category_name" class="form-control" wire:model="new_category.{{"category_name"}}">
+            <input type="text" id="n_category_name" class="form-control" required wire:model="new_category.{{"category_name"}}">
         </div>
         <div>
             <label for="n_category_descr">Описание новой категории</label>
             <textarea id="n_category_descr" style="resize: none" class="form-control bi-textarea-resize"
                       wire:model="new_category.{{"description"}}"></textarea>
+            @error('new_category.description')<span class="error">Недостаточно символов в описании</span> @enderror
         </div>
         <div>
             <label for="parent">Родительская категория</label>
@@ -43,7 +44,7 @@
                     <div class="edit" style="{{$edit === $category->id ? "" :"display:none"}}">
                         <p>
                             <label for="edited_name">Наименование</label>
-                            <input type="text" class="form-control" id="edited_name" wire:model="edited.{{"name"}}">
+                            <input type="text" class="form-control" id="edited_name" wire:model="edited.{{"name"}}" required>
                         </p>
                         <p>
                             <label for="edited_desc">Описание</label>

@@ -23,7 +23,7 @@ class ProductComponent extends Component
     {
         $service->createProduct($this->new_product, $this->categories);
         $this->created = true;
-    }//TODO VALIDATION
+    }
 
     public function render()
     {
