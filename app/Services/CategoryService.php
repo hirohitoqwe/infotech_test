@@ -15,7 +15,6 @@ class CategoryService
         ]);
         if ($new_category["parent_category"] != "") {
             $category = Category::where('category_name', $new_category["parent_category"])->first();
-            $category->sub_count++;
             $category->save();
         }
         return [

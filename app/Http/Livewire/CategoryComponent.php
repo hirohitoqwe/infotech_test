@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\RelantionProdCat;
 use App\Services\CategoryService;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use function Symfony\Component\Translation\t;
 
@@ -25,7 +26,7 @@ class CategoryComponent extends Component
 
     public bool $created = false;
 
-    public Collection $categories;
+    public $categories;
 
     public int $edit = 0;
 
@@ -85,7 +86,7 @@ class CategoryComponent extends Component
 
     public function render()
     {
-        $this->categories = Category::all();
+        $this->categories = DB::select("select categories.id, category_name,description,parent_category,count(product_id) as p_count,(select count(*) from categories as cat2 where cat2.parent_category = categories.category_name) as sub_count from categories LEFT JOIN relantion_prod_cats ON categories.id = category_id GROUP BY categories.id;");
         return view('livewire.category-component')->extends("layouts.app");
     }
 }

@@ -16,8 +16,6 @@ class ProductService
         $product->save();
         foreach ($categories as $key => $category) {
             $model = Category::where('category_name', $category)->first();
-            $model->product_count += 1;
-            $model->save();
             $rel = new RelantionProdCat();
             $rel->product_id = $product->id;
             $rel->category_id = $model->id;

@@ -14,8 +14,6 @@ return new class extends Migration {
             $table->id();
             $table->string('category_name')->unique();
             $table->text('description');
-            $table->integer('sub_count')->default(0);
-            $table->integer('product_count')->default(0);
             $table->string('parent_category')->nullable();
             $table->timestamps();
         });
