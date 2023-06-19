@@ -86,7 +86,7 @@ class CategoryComponent extends Component
 
     public function render()
     {
-        $this->categories = DB::select("select categories.id, category_name,description,parent_category,count(product_id) as p_count,(select count(*) from categories as cat2 where cat2.parent_category = categories.category_name) as sub_count from categories LEFT JOIN relantion_prod_cats ON categories.id = category_id GROUP BY categories.id;");
+        $this->categories = DB::select("select categories.id, category_name,description,parent_category,count(product_id) as p_count,(select count(*) from categories as cat2 where cat2.parent_category = categories.category_name) as sub_count from categories LEFT JOIN prod_cat ON categories.id = category_id GROUP BY categories.id;");
         return view('livewire.category-component')->extends("layouts.app");
     }
 }
